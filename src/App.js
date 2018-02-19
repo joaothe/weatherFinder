@@ -8,7 +8,9 @@ const API_KEY = "---------------";
 
 class App extends React.Component {
 
-  getWeather = async () => {
+  getWeather = async (e) => {
+    e.preventDefault();
+    //without await, api_call receives a promise. Witht await keyword, it returns the fetch result.
     const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=Manchester,uk&appid=${API_KEY}&units=metric`);
     const data = await api_call.json();
   }
@@ -17,7 +19,7 @@ class App extends React.Component {
     return (
       <div>
         <Titles/>
-        <Form />
+        <Form getWeather={this.getWeather}/>
         <Weather />
       </div>
     );
